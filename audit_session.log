@@ -1,0 +1,365 @@
+﻿**********************
+Inicio de la transcripción de Windows PowerShell
+Hora de inicio: 20261020154523
+Nombre de usuario: DESKTOP-8QPNS8P\MIPC
+Usuario RunAs: DESKTOP-8QPNS8P\MIPC
+Nombre de la configuración: 
+Máquina: DESKTOP-8QPNS8P (Microsoft Windows NT 10.0.26200.0)
+Aplicación host: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -noexit -command try { . "c:\Users\MIPC\AppData\Local\Programs\Microsoft VS Code\6d62b1d5da\resources\app\out\vs\workbench\contrib\terminal\common\scripts\shellIntegration.ps1" } catch {}
+Id. de proceso: 5748
+PSVersion: 5.1.26100.9711
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.9711
+BuildVersion: 10.0.26100.9711
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+La transcripción ha comenzado. El archivo de salida es C:\Users\MIPC\taller_docker_semana13\audit_session.log
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker run --rm --entrypoint env eco-air-backend:1.0.0
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker history --human --format "table {{.Size}}\t{{.CreatedBy}}" eco-air-backend:1.0.0
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker run -d --name eco_air_active -p 8080:8080 eco-air-backend:1.0.0
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker logs -t eco_air_active
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker top eco_air_active -o pid,user,comm
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker ps
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>curl.exe http://localhost:8080/health
+OK
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker exec eco_air_active touch /etc/crontab_fake
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>$LASTEXITCODE
+1
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker exec eco_air_active which mvn
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>$LASTEXITCODE
+1
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker exec eco_air_active find / -name "*.java" 2>$null
+docker : find: /proc/tty/driver: Permission denied
+En línea: 1 Carácter: 1
++ docker exec eco_air_active find / -name "*.java" 2>$null
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (find: /proc/tty...rmission denied:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+find: /root: Permission denied
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>$LASTEXITCODE
+1
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker inspect --format='{{.Id}}' eco-air-backend:1.0.0
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker exec eco_air_active env | Select-String OPERATOR_ID
+
+OPERATOR_ID=RonaldBenavides
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker rm -f eco_air_active
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker run -d --name eco_air_crash -m 48m eco-air-backend:1.0.0
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>Start-Sleep -Seconds 10
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker inspect eco_air_crash --format='Status: {{.State.Status}} | ExitCode: {{.State.ExitCode}} | OOMKilled: {{.State.OOMKilled}}'
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker logs -t eco_air_crash
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker stats --no-stream eco_air_crash
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+]633;D]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker rm -f eco_air_crash
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker run -d --name eco_air_256 -m 256m eco-air-backend:1.0.0
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>Start-Sleep -Seconds 20
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker inspect eco_air_256 --format='Status: {{.State.Status}} | ExitCode: {{.State.ExitCode}} | OOMKilled: {{.State.OOMKilled}}'
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker logs -t eco_air_256 | Select-String "Started EcoAirApplication"
+
+2026-10-20T20:54:39.235278040Z 2026-10-20T20:54:39.234Z  INFO 1 --- [eco-air-backend] [           main] com.ecoair.EcoAirApplication             : Started
+EcoAirApplication in 4.092 seconds (process running for 5.102)
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker stats --no-stream eco_air_256
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>Start-Sleep -Seconds 30
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker stats --no-stream eco_air_256
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker rm -f eco_air_256
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker run -d --name eco_air_128 -m 128m eco-air-backend:1.0.0
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>Start-Sleep -Seconds 25
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker inspect eco_air_128 --format='Status: {{.State.Status}} | ExitCode: {{.State.ExitCode}} | OOMKilled: {{.State.OOMKilled}}'
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker logs -t eco_air_128 | Select-String "Started EcoAirApplication"
+
+2026-10-20T20:57:34.350070541Z 2026-10-20T20:57:34.349Z  INFO 1 --- [eco-air-backend] [           main] com.ecoair.EcoAirApplication             : Started
+EcoAirApplication in 4.079 seconds (process running for 5.255)
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>Status: running | ExitCode: 0 | OOMKilled: false
+Started EcoAirApplication in 4.079 seconds (process running for 5.255)
+Status: : El término 'Status:' no se reconoce como nombre de un cmdlet, función, archivo de script o programa 
+ejecutable. Compruebe si escribió correctamente el nombre o, si incluyó una ruta de acceso, compruebe que dicha ruta es 
+correcta e inténtelo de nuevo.
+En línea: 1 Carácter: 1
++ Status: running | ExitCode: 0 | OOMKilled: false
++ ~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (Status::String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+Status: : El término 'Status:' no se reconoce como nombre de un cmdlet, función, archivo de script o programa ejecutable. Compruebe si escribió correctamente
+el nombre o, si incluyó una ruta de acceso, compruebe que dicha ruta es correcta e inténtelo de nuevo.
+En línea: 1 Carácter: 1
++ Status: running | ExitCode: 0 | OOMKilled: false
++ ~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (Status::String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+>> ErrorTerminación(Get-Process): "No se encuentra ningún parámetro de posición que acepte el argumento 'for'."
+Get-Process : No se encuentra ningún parámetro de posición que acepte el argumento 'for'.
+En línea: 2 Carácter: 45
++ ... tarted EcoAirApplication in 4.079 seconds (process running for 5.255)
++                                                ~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Get-Process], ParameterBindingException
+    + FullyQualifiedErrorId : PositionalParameterNotFound,Microsoft.PowerShell.Commands.GetProcessCommand
+Get-Process : No se encuentra ningún parámetro de posición que acepte el argumento 'for'.
+En línea: 2 Carácter: 45
++ ... tarted EcoAirApplication in 4.079 seconds (process running for 5.255)
++                                                ~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Get-Process], ParameterBindingException
+    + FullyQualifiedErrorId : PositionalParameterNotFound,Microsoft.PowerShell.Commands.GetProcessCommand
+
+]633;D;1]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker stats --no-stream eco_air_128
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker inspect eco_air_128 --format='Memory: {{.HostConfig.Memory}} | MemorySwap: {{.HostConfig.MemorySwap}}'
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker stats --no-stream eco_air_128
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker rm -f eco_air_128
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker run -d --name eco_air_96 -m 96m eco-air-backend:1.0.0
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>Start-Sleep -Seconds 25
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker inspect eco_air_96 --format='Status: {{.State.Status}} | ExitCode: {{.State.ExitCode}} | OOMKilled: {{.State.OOMKilled}}'
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker logs -t eco_air_96 | Select-String "Started EcoAirApplication"
+
+2026-10-20T21:00:23.753243109Z 2026-10-20T21:00:23.752Z  INFO 1 --- [eco-air-backend] [           main] com.ecoair.EcoAirApplication             : Started
+EcoAirApplication in 3.704 seconds (process running for 4.25)
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker stats --no-stream eco_air_96
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker inspect eco_air_96 --format='Memory: {{.HostConfig.Memory}} | MemorySwap: {{.HostConfig.MemorySwap}}'
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker inspect eco_air_96 --format='Status: {{.State.Status}} | ExitCode: {{.State.ExitCode}} | OOMKilled: {{.State.OOMKilled}}'
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker logs -t eco_air_96 | Select-String "Started EcoAirApplication"
+
+2026-10-20T21:00:23.753243109Z 2026-10-20T21:00:23.752Z  INFO 1 --- [eco-air-backend] [           main] com.ecoair.EcoAirApplication             : Started
+EcoAirApplication in 3.704 seconds (process running for 4.25)
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker rm -f eco_air_96
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker run -d --name eco_air_128 -m 128m eco-air-backend:1.0.0
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>Start-Sleep -Seconds 25
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker stats --no-stream eco_air_128
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker rm -f eco_air_128
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker run -d --name eco_air_96 -m 96m eco-air-backend:1.0.0
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>Start-Sleep -Seconds 40
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker inspect eco_air_96 --format='Status: {{.State.Status}} | ExitCode: {{.State.ExitCode}} | OOMKilled: {{.State.OOMKilled}}'
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker logs -t eco_air_96 | Select-String "Started EcoAirApplication"
+
+2026-10-20T21:04:04.533758520Z 2026-10-20T21:04:04.533Z  INFO 1 --- [eco-air-backend] [           main] com.ecoair.EcoAirApplication             : Started
+EcoAirApplication in 4.02 seconds (process running for 4.974)
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker stats --no-stream eco_air_96
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker rm -f eco_air_96
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker run -d --name eco_air_64 -m 64m eco-air-backend:1.0.0
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>Start-Sleep -Seconds 40
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker inspect eco_air_64 --format='Status: {{.State.Status}} | ExitCode: {{.State.ExitCode}} | OOMKilled: {{.State.OOMKilled}}'
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker logs -t eco_air_64 | Select-String "Started EcoAirApplication"
+
+2026-10-20T21:05:50.365271884Z 2026-10-20T21:05:50.364Z  INFO 1 --- [eco-air-backend] [           main] com.ecoair.EcoAirApplication             : Started
+EcoAirApplication in 10.798 seconds (process running for 11.815)
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker stats --no-stream eco_air_64
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker inspect eco_air_64 --format='Memory: {{.HostConfig.Memory}} | MemorySwap: {{.HostConfig.MemorySwap}}'
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker run -d --name eco_air_56 -m 56m eco-air-backend:1.0.0
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>Start-Sleep -Seconds 45
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker rm -f eco_air_64
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker run -d --name eco_air_384 -m 384m eco-air-backend:1.0.0
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>Start-Sleep -Seconds 25
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker inspect eco_air_384 --format='Status: {{.State.Status}} | ExitCode: {{.State.ExitCode}} | OOMKilled: {{.State.OOMKilled}}'
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker logs -t eco_air_384 | Select-String "Started EcoAirApplication"
+
+2026-10-20T21:08:49.706766187Z 2026-10-20T21:08:49.706Z  INFO 1 --- [eco-air-backend] [           main] com.ecoair.EcoAirApplication             : Started
+EcoAirApplication in 4.035 seconds (process running for 4.906)
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker stats --no-stream eco_air_384
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker rm -f eco_air_384
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker run -d --name eco_air_512 -m 512m eco-air-backend:1.0.0
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>Start-Sleep -Seconds 25
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker inspect eco_air_512 --format='Status: {{.State.Status}} | ExitCode: {{.State.ExitCode}} | OOMKilled: {{.State.OOMKilled}}'
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker logs -t eco_air_512 | Select-String "Started EcoAirApplication"
+
+2026-10-20T21:10:36.567210173Z 2026-10-20T21:10:36.566Z  INFO 1 --- [eco-air-backend] [           main] com.ecoair.EcoAirApplication             : Started
+EcoAirApplication in 4.167 seconds (process running for 5.157)
+
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+]633;D]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker stats --no-stream eco_air_512
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker rm -f eco_air_512
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker run -d --name eco_air_crash -m 48m eco-air-backend:1.0.0
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>Start-Sleep -Seconds 10
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker inspect eco_air_crash --format='Status: {{.State.Status}} | ExitCode: {{.State.ExitCode}} | OOMKilled: {{.State.OOMKilled}}'
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker inspect eco_air_crash --format='Memory: {{.HostConfig.Memory}} | MemorySwap: {{.HostConfig.MemorySwap}}'
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker rm -f eco_air_64
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker rm -f eco_air_crash
+eco_air_crash
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker run -d --name eco_air_crash -m 48m eco-air-backend:1.0.0
+ee0a267faa6edb0e622603fa703441dfc3f37b16dcce28ca4b56916b6cdde69f
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>Start-Sleep -Seconds 10
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker inspect eco_air_crash --format='Status: {{.State.Status}} | ExitCode: {{.State.ExitCode}} | OOMKilled: {{.State.OOMKilled}}'
+Status: running | ExitCode: 0 | OOMKilled: false
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker inspect eco_air_crash --format='Memory: {{.HostConfig.Memory}} | MemorySwap: {{.HostConfig.MemorySwap}}'
+Memory: 50331648 | MemorySwap: 100663296
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker run -d --name eco_air_oom -m 48m --memory-swap 48m eco-air-backend:1.0.0
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>Start-Sleep -Seconds 20
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker inspect eco_air_oom --format='Status: {{.State.Status}} | ExitCode: {{.State.ExitCode}} | OOMKilled: {{.State.OOMKilled}}'
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker logs -t eco_air_oom
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker inspect eco_air_oom --format='Memory: {{.HostConfig.Memory}} | MemorySwap: {{.HostConfig.MemorySwap}}'
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
+PS>docker rm -f eco_air_oom
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cMIPC\x5ctaller_docker_semana13PS C:\Users\MIPC\taller_docker_semana13> ]633;B
